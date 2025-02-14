@@ -9,7 +9,7 @@
     "outDir": "./dist", // Folder output untuk file yang dikompilasi
     "rootDir": "./src", // Folder sumber utama (opsional)
     "moduleResolution": "node", // Menggunakan resolusi modul Node.js
-    "resolveJsonModule": true // Memungkinkan impor file JSON (opsional)
+    "resolveJsonModule": true
   },
   "include": [
     "./src" // File yang akan diikutsertakan dalam kompilasi

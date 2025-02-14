@@ -1,7 +1,7 @@
 import { Client, Message } from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
 import { waWebJSConfig } from "./configs/wawebjs";
-import { commandHandlers } from "./services/command-handler";
+import { commandHandlers } from "./utils/command-handler";
 
 async function main() {
   const client = new Client(waWebJSConfig);
@@ -16,13 +16,14 @@ async function main() {
   });
 
   client.on("message_create", async (message: Message) => {
+    if (!message.fromMe) return; // Ensure the bot does not process its own messages
+
     const body: string = message.body;
     const prefixMatch = body.match(/^[\\/!#.]/gi);
     const prefix: string = prefixMatch ? prefixMatch[0] : "/";
     const command: string =
       body.replace(prefix, "").trim().split(/ +/).shift()?.toLowerCase() || "";
     const args: string[] = body.trim().split(/ +/).slice(1);
-    if (!message.fromMe) return;
     if (!body.startsWith(prefix)) return;
 
     for (const [pattern, handler] of Object.entries(commandHandlers)) {
