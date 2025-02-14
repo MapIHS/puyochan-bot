@@ -1,5 +1,5 @@
 import { Message } from "whatsapp-web.js";
 
-export async function getPing(args: string[], message: Message): Promise<Message> {
+export default async (args: string[], message: Message, prefix: string): Promise<Message> => {
   return message.reply("Pong!");
 }
