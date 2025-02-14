@@ -9,6 +9,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "bun src/main.ts --watch",
+    "start": "node dist/main.js",
+    "tsc": "tsc",
     "lint": "eslint --fix"
   },
   "devDependencies": {

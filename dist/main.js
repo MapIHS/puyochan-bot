@@ -15,18 +15,30 @@ async function main() {
     client.on("ready", () => {
         console.log("READY");
     });
-    client.on("message_create", (message) => {
+    client.on("message_create", async (message) => {
         const body = message.body;
         const prefixMatch = body.match(/^[\\/!#.]/gi);
         const prefix = prefixMatch ? prefixMatch[0] : "/";
-        const command = body
-            .replace(prefix, "")
-            .trim()
-            .split(/ +/)
-            .shift()?.toLowerCase() || "";
+        const command = body.replace(prefix, "").trim().split(/ +/).shift()?.toLowerCase() || "";
         const args = body.trim().split(/ +/).slice(1);
-        if (command === "ping") {
-            message.reply("pong 🏓\n" + args);
+        if (!message.fromMe)
+            return;
+        if (!body.startsWith(prefix))
+            return;
+        const commandHandlers = {
+            "ping": async (args, message) => {
+                await message.reply("Pong!");
+            },
+            "echo": async (args, message) => {
+                await message.reply(args.join(" "));
+            },
+        };
+        for (const [pattern, handler] of Object.entries(commandHandlers)) {
+            const regex = new RegExp(`^${pattern}$`, "i");
+            if (regex.test(command)) {
+                await handler(args, message);
+                break;
+            }
         }
     });
     client.initialize();
