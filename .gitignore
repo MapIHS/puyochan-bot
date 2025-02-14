@@ -1,0 +1,11 @@
+.wwebjs_auth
+.wwebjs_cache
+node_modules
+.env
+.env.local
+
+# managed by open-wa
+**.data.json
+**.node-persist**
+**_IGNORE_**
+# end managed by open-wa

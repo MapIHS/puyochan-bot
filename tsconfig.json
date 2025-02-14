@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Target versi ECMAScript
+    "module": "commonjs", // Modul sistem yang digunakan
+    "esModuleInterop": true, // Memungkinkan interop antara modul CommonJS dan ES
+    "forceConsistentCasingInFileNames": true, // Memastikan konsistensi penamaan file
+    "strict": true, // Mengaktifkan semua opsi strict type-checking
+    "skipLibCheck": true, // Melewati pengecekan tipe di file deklarasi library
+    "outDir": "./dist", // Folder output untuk file yang dikompilasi
+    "rootDir": "./src", // Folder sumber utama (opsional)
+    "moduleResolution": "node", // Menggunakan resolusi modul Node.js
+    "resolveJsonModule": true // Memungkinkan impor file JSON (opsional)
+  },
+  "include": [
+    "./src" // File yang akan diikutsertakan dalam kompilasi
+  ],
+  "exclude": [
+    "./node_modules" // File yang akan dikecualikan dari kompilasi
+  ]
+}
