@@ -1,6 +1,7 @@
 import { Client, Message } from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
 import { waWebJSConfig } from "./configs/wawebjs";
+import { commandHandlers } from "./services/command-handler";
 
 async function main() {
   const client = new Client(waWebJSConfig);
@@ -24,20 +25,10 @@ async function main() {
     if (!message.fromMe) return;
     if (!body.startsWith(prefix)) return;
 
-    const commandHandlers: { [key: string]: (args: string[], message: Message) => Promise<void> } =
-      {
-        "ping": async (args, message) => {
-          await message.reply("Pong!");
-        },
-        "echo": async (args, message) => {
-          await message.reply(args.join(" "));
-        },
-      };
-
     for (const [pattern, handler] of Object.entries(commandHandlers)) {
       const regex = new RegExp(`^${pattern}$`, "i");
       if (regex.test(command)) {
-        await handler(args, message);
+        await handler(args, message, prefix);
         break;
       }
     }
