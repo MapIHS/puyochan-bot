@@ -1,10 +1,9 @@
 import { Message } from "whatsapp-web.js";
-import { commandHandlers, loadCommands } from "../utils/command-handler";
+import { commandHandlers } from "../utils/command-handler";
 
 // @CommandName menu
 export default async (args: string[], message: Message, prefix: string): Promise<Message> => {
   try {
-    await loadCommands(); // Ensure commands are loaded
     const commands = Object.keys(commandHandlers)
       .map((command) => `*${prefix}${command}*`)
       .join("\n");
